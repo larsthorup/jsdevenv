@@ -5,17 +5,10 @@
     <title>jsdevenv</title>
 </head>
 <body>
-    <!-- ToDo: Use require.js -->
-    <script src="lib/jQuery.js"></script>
-    <script src="js/util/random.js"></script>
-    <script>
-        $(function() {
-            $("#randomNumber").text(Math.randomBelow(42));
-        });
-    </script>
     <p>
         <span id="randomNumber"></span>
         is a random number.
     </p>
+    <script data-main="js/requireConfig" src="lib/require.min.js"></script>
 </body>
 </html>
