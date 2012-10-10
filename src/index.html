@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jsdevenv</title>
+</head>
+<body>
+    <!-- ToDo: Use require.js -->
+    <script src="lib/jQuery.js"></script>
+    <script src="js/util/random.js"></script>
+    <script>
+        $(function() {
+            $("#randomNumber").text(Math.randomBelow(42));
+        });
+    </script>
+    <p>
+        <span id="randomNumber"></span>
+        is a random number.
+    </p>
+</body>
+</html>
