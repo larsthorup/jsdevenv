@@ -3,7 +3,8 @@ var config = {
 		'src/'
 	],
 	exclusions: [
-		'src/lib/'
+		'src/lib/',
+        'src/test/lib/'
 	],
 	jsLint: './build/lib/jslint.js',
 	lintOptions: {},
