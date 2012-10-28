@@ -1,7 +1,7 @@
 require([
     "jquery",
     "util/random"
-],function() {
+], function () {
     $("#randomNumber").text(Math.randomBelow(42));
 });
 

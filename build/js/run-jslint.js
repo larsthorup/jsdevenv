@@ -7,7 +7,11 @@ var config = {
         'src/test/lib/'
 	],
 	jsLint: './build/lib/jslint.js',
-	lintOptions: {},
+	lintOptions: {
+        white: false // sloppy whitespace not tolerated
+        // ToDo: figure out how to "use strict"; together with require.js
+        // sloppy: false // force "use strict"; pragma
+    },
 	verbose: false,
 	stopOnFirstError: false,
 	logFile: './output/error.log'
