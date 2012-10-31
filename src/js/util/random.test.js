@@ -1,9 +1,9 @@
-/*global require,sinon,module,test,equal,throws*/
+/*global require,sinon,QUnit*/
 require([
     "util/random"
 ], function () {
     "use strict";
-    module("util/random", {
+    QUnit.module("util/random", {
         setup: function () {
             sinon.stub(Math, "random").returns(0.85);
         },
@@ -12,9 +12,9 @@ require([
         }
     });
 
-    test("randomBelow", function () {
-        equal(Math.randomBelow(6), 5, "6");
-        equal(Math.randomBelow(1), 0, "1");
-        throws(function () { Math.randomBelow(0); }, "invalid argument: 0", "0");
+    QUnit.test("randomBelow", function () {
+        QUnit.equal(Math.randomBelow(6), 5, "6");
+        QUnit.equal(Math.randomBelow(1), 0, "1");
+        QUnit.throws(function () { Math.randomBelow(0); }, "invalid argument: 0", "0");
     });
 });
