@@ -1,7 +1,15 @@
 jsdevenv
 ========
 
-Creating a build environment for JavaScript projects
+Creating a build environment for JavaScript projects.
+
+Prerequisites:
+
+Install node.js
+
+install prerequisites
+
+    npm install
 
 
 From the browser
