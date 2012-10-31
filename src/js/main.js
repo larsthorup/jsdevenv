@@ -1,8 +1,8 @@
-/*global require,$*/
+/*global require*/
 require([
     "jquery",
     "util/random"
-], function () {
+], function ($) {
     "use strict";
     $("#randomNumber").text(Math.randomBelow(42));
 });
