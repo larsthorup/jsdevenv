@@ -8,9 +8,8 @@ var config = {
 	],
 	jsLint: './build/lib/jslint.js',
 	lintOptions: {
-        white: false // sloppy whitespace not tolerated
-        // ToDo: figure out how to "use strict"; together with require.js
-        // sloppy: false // force "use strict"; pragma
+        white: false, // sloppy whitespace not tolerated
+        sloppy: false // force "use strict"; pragma
     },
 	verbose: false,
 	stopOnFirstError: false,

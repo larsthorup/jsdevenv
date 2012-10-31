@@ -1,6 +1,8 @@
+/*global require,sinon,module,test,equal,throws*/
 require([
     "util/random"
 ], function () {
+    "use strict";
     module("util/random", {
         setup: function () {
             sinon.stub(Math, "random").returns(0.85);
