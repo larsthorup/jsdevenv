@@ -4,6 +4,9 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
+        qunit: {
+            all: ['src/test/index.html']
+        },
         lint: {
             all: ['Gruntfile.js', 'src/js/**/*.js']
         },
@@ -32,7 +35,7 @@ module.exports = function (grunt) {
         }
     });
 
-    // Default task.
-    grunt.registerTask('default', 'lint');
-
+    // default and alias tasks
+    grunt.registerTask('test', 'qunit');
+    grunt.registerTask('default', 'lint test');
 };
