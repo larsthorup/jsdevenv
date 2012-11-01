@@ -1,7 +1,7 @@
-/*global require,define*/
+/*global define*/
 define([
 ], function () {
-    "use strict";
+    'use strict';
 
     return {
         strength: function (password) {

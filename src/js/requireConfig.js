@@ -1,8 +1,8 @@
-/*global require,define*/
+/*global require*/
 require.config({
-    deps: ["main"],
+    deps: ['main'],
 
     paths: {
-        jquery: "../lib/jquery"
+        jquery: '../lib/jquery'
     }
 });

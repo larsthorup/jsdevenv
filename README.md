@@ -17,24 +17,12 @@ From the browser
 
 run all tests
 
-    file://(path-to)/all.test.html
+    file://(path-to)/src/test/index.html
 
 
 From the command line
 ---------------------
 
-on Windows
-
-    cd build\windows
-
-run all tests and show coverage analysis in the browser
-
-    coverage
-
-run all tests with coverage, formatting the output to be suitable for TeamCity
-
-    test
-
 perform static analysis
 
-    lint
+    grunt lint
