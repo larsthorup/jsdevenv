@@ -4,7 +4,10 @@
     "description": "A sample build environment for JavaScript",
     "author": "Lars Thorup <lars@zealake.com>",
     "dependencies": {
-        "grunt": "0.3.x"
+        "grunt": "0.3.x",
+        "phantomjs": "0.2.x",
+        "buster": "0.6.x",
+        "grunt-buster": "0.1.x"
     },
     "engine": "node 1.1.x"
 }

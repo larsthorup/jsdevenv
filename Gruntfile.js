@@ -10,6 +10,14 @@ module.exports = function (grunt) {
         lint: {
             all: ['Gruntfile.js', 'src/js/**/*.js']
         },
+        buster: {
+            test: {
+                config: 'path/to/my/buster.js'
+            },
+            server: {
+                port: 1111
+            }
+        },
         jshint: {
             options: {
                 bitwise: true,
@@ -34,6 +42,8 @@ module.exports = function (grunt) {
             }
         }
     });
+
+    grunt.loadNpmTasks('grunt-buster');
 
     // default and alias tasks
     grunt.registerTask('test', 'qunit');
