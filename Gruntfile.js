@@ -4,6 +4,12 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
+        watch: {
+            scripts: {
+                files: 'src/**/*.*',
+                tasks: 'lint qunit'
+            }
+        },
         qunit: {
             all: ['src/test/index.html']
         },
