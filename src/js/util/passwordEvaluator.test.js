@@ -2,7 +2,7 @@
 require([
     'util/passwordEvaluator'
 ], function (pw) {
-    module('password');
+    module('util.passwordEvaluator');
     test('bad', function () {
         equal(pw.strength('abc'), 0, 'abc');
     });
