@@ -2,7 +2,7 @@
 require([
     'util/random'
 ], function () {
-    module('util/random', {
+    module('util.random', {
         setup: function () {
             sinon.stub(Math, 'random').returns(0.85);
         },
