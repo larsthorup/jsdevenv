@@ -49,9 +49,10 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-junit');
     grunt.loadNpmTasks('grunt-buster');
 
     // default and alias tasks
-    grunt.registerTask('test', 'qunit');
+    grunt.registerTask('test', 'junit');
     grunt.registerTask('default', 'lint test');
 };

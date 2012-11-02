@@ -26,3 +26,11 @@ From the command line
 perform static analysis
 
     grunt lint
+
+run all tests
+
+    grunt test
+
+continuously lint and test on every save
+
+    grunt watch

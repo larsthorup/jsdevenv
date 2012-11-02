@@ -6,6 +6,7 @@
     "dependencies": {
         "grunt": "0.3.x",
         "phantomjs": "0.2.x",
+        "grunt-junit": "0.1.x",
         "buster": "0.6.x",
         "grunt-buster": "0.1.x"
     },
