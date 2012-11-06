@@ -4,6 +4,17 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
+        'qunit-cov': {
+            test:
+            {
+                minimum: 0.9,
+                baseDir: 'src',
+                srcDir: 'src/js',
+                depDirs: ['src/lib', 'src/test'],
+                outDir: 'output/coverage',
+                testFiles: ['src/test/index.html']
+            }
+        },
         watch: {
             scripts: {
                 files: 'src/**/*.*',
@@ -51,8 +62,10 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-junit');
     grunt.loadNpmTasks('grunt-buster');
+    grunt.loadNpmTasks('grunt-qunit-cov');
 
     // default and alias tasks
+    grunt.registerTask('coverage', 'qunit-cov');
     grunt.registerTask('test', 'junit');
     grunt.registerTask('default', 'lint test');
 };
