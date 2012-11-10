@@ -5,9 +5,9 @@ Creating a build environment for JavaScript projects.
 
 Prerequisites:
 
-Install node.js
+* install node.js
 
-install prerequisites
+then
 
     npm install
 
@@ -23,6 +23,10 @@ run all tests
 From the command line
 ---------------------
 
+continuously lint and test on every save
+
+    grunt watch
+
 perform static analysis
 
     grunt lint
@@ -31,6 +35,6 @@ run all tests
 
     grunt test
 
-continuously lint and test on every save
+produce test coverage statistics (in output\coverage\out\coverage.html)
 
-    grunt watch
+    grunt coverage
