@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         'qunit-cov': {
             test:
             {
-                minimum: 0.9,
+                minimum: 0.99,
                 baseDir: 'src',
                 srcDir: 'src/js',
                 depDirs: ['src/lib', 'src/test'],
