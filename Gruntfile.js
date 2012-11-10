@@ -4,6 +4,15 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
+        requirejs: {
+            name: 'main',
+            dir: 'output/bundle',
+            appDir: 'src',
+            baseUrl: 'js',
+            paths: {
+                jquery: '../lib/jquery'
+            }
+        },
         'qunit-cov': {
             test:
             {
@@ -22,18 +31,11 @@ module.exports = function (grunt) {
             }
         },
         qunit: {
-            all: ['src/test/index.html']
+            src: ['src/test/index.html'],
+            bundle: ['output/bundle/test/index.html']
         },
         lint: {
             all: ['Gruntfile.js', 'src/js/**/*.js']
-        },
-        buster: {
-            test: {
-                config: 'path/to/my/buster.js'
-            },
-            server: {
-                port: 1111
-            }
         },
         jshint: {
             options: {
@@ -61,11 +63,13 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-junit');
-    grunt.loadNpmTasks('grunt-buster');
     grunt.loadNpmTasks('grunt-qunit-cov');
+    grunt.loadNpmTasks('grunt-requirejs');
 
     // default and alias tasks
+    grunt.registerTask('test-bundle', 'qunit:bundle');
+    grunt.registerTask('bundle', 'requirejs');
     grunt.registerTask('coverage', 'qunit-cov');
-    grunt.registerTask('test', 'junit');
+    grunt.registerTask('test', 'junit:env qunit:src');
     grunt.registerTask('default', 'lint test');
 };

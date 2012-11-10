@@ -7,8 +7,8 @@
         "grunt": "0.3.x",
         "phantomjs": "0.2.x",
         "grunt-junit": "0.1.x",
-        "grunt-qunit-cov": ">=0.2.4"
+        "grunt-qunit-cov": ">=0.2.4",
+        "grunt-requirejs": "0.2.x"
     },
-    "comment": "buster: 0.6.x, grunt-buster: 0.1.x",
     "engine": "node 1.1.x"
 }
