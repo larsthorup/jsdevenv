@@ -6,8 +6,8 @@
     "engine": "node 1.1.x",
     "devDependencies": {
         "grunt": "0.3.x",
-        "phantomjs": "0.2.x",
-        "grunt-junit": "0.1.x",
+        "phantomjs": "0.2.2",
+        "grunt-junit": "0.1.4",
         "grunt-qunit-cov": ">=0.2.4",
         "grunt-requirejs": "0.2.x",
         "connect": "2.7.x",
