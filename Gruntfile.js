@@ -1,61 +1,89 @@
-/*global module,require*/
+/*global module*/
+/*jshint camelcase:false*/ // because of gruntConfig.qunit_junit
 module.exports = function (grunt) {
     'use strict';
-    var connect = require('connect');
 
+    var gruntConfig = {
+        pkg: grunt.file.readJSON('package.json')
+    };
 
     // convenience
-    grunt.registerTask('default', 'lint test');
-    grunt.registerTask('all', 'clean lint test coverage bundle');
-    grunt.registerTask('ci', 'lint qunit:src');
+    grunt.registerTask('default', ['lint', 'test']);
+    grunt.registerTask('all', ['clean', 'lint', 'test', 'coverage', 'bundle']);
+
+    // continuous integration
+    grunt.registerTask('ci', ['lint', 'qunit:src']);
 
 
     // clean
-    grunt.loadNpmTasks('grunt-clean');
-    var cleanConfig = {
-        folder: 'output'
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    gruntConfig.clean = {
+        output: ['output']
     };
 
 
     // lint
-    var lintConfig = {
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    gruntConfig.jshint = {
+        options: { bitwise: true, camelcase: true, curly: true, eqeqeq: true, forin: true, immed: true,
+            indent: 4, latedef: true, newcap: true, noarg: true, noempty: true, nonew: true, plusplus: true,
+            quotmark: true, regexp: true, undef: true, unused: true, strict: true, trailing: true,
+            maxparams: 3, maxdepth: 2, maxstatements: 50},
         all: [
             'Gruntfile.js',
             'src/js/**/*.js'
         ]
     };
-    var jsHintOptions = {
-        options: { bitwise: true, camelcase: true, curly: true, eqeqeq: true, forin: true, immed: true, indent: 4,
-            latedef: true, newcap: true, noarg: true, noempty: true, nonew: true, plusplus: true, quotmark: true,
-            regexp: true, undef: true, unused: true, strict: true, trailing: true
+    grunt.registerTask('lint', 'jshint');
+
+
+    // test
+    grunt.loadNpmTasks('grunt-contrib-qunit');
+    gruntConfig.qunit = {
+        src: ['src/test/index.html'],
+        serve: { options: { urls: ['http://localhost:8082/test/index.html']}},
+        bundle: ['output/bundle/test/index.html']
+    };
+    grunt.loadNpmTasks('grunt-qunit-junit');
+    gruntConfig.qunit_junit = {
+        options: {
+            dest: 'output/testresults'
         }
     };
 
 
-    // test
-    var qunitConfig = {
-        src: ['src/test/index.html'],
-        serve: ['http://localhost:8082/test/index.html'],
-        bundle: ['output/bundle/test/index.html']
+    // serve
+    grunt.registerTask('wait', 'keep running until terminated', function () {
+        /* var done =*/
+        this.async();
+    });
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    gruntConfig.connect = {};
+    gruntConfig.connect.test = {
+        options: {
+            port: 8082,
+            base: 'src'
+        }
     };
-    grunt.loadNpmTasks('grunt-junit');
+    grunt.registerTask('test', ['qunit_junit', 'connect:test', 'qunit:serve']);
 
 
     // watch
-    var watchConfig = {
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    gruntConfig.watch = {
         scripts: {
-            files: 'src/**/*.*',
-            tasks: 'lint qunit'
+            files: ['src/**/*.*'],
+            tasks: ['lint qunit']
         }
     };
 
 
     // coverage
     grunt.loadNpmTasks('grunt-qunit-cov');
-    var coverageConfig = {
+    gruntConfig['qunit-cov'] = {
         test:
         {
-            minimum: 0.99,
+            minimum: 1.0,
             baseDir: 'src',
             srcDir: 'src/js',
             depDirs: ['src/lib', 'src/test'],
@@ -67,61 +95,34 @@ module.exports = function (grunt) {
 
 
     // bundle
-    grunt.loadNpmTasks('grunt-requirejs');
-    var requirejsConfig = {
-        name: 'main',
-        dir: 'output/optimized',
-        appDir: 'src',
-        baseUrl: 'js',
-        paths: {
-            jquery: '../lib/jquery'
-        }
-    };
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    var copyConfig = {
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    gruntConfig.requirejs = {
         bundle: {
-            files: {
-                'output/bundle/index.html': 'output/optimized/index.html',
-                'output/bundle/lib/require.min.js': 'output/optimized/lib/require.min.js',
-                'output/bundle/js/requireConfig.js': 'output/optimized/js/requireConfig.js',
-                'output/bundle/js/main.js': 'output/optimized/js/main.js'
+            options: {
+                name: 'main',
+                appDir: 'src',
+                baseUrl: 'js',
+                mainConfigFile: 'src/js/requireConfig.js',
+                dir: 'output/optimized'
             }
         }
     };
-    grunt.registerTask('bundle', 'requirejs copy:bundle');
-    grunt.registerTask('test:bundle', 'qunit:bundle');
-
-
-    // serve
-    var serve = function (path, port) {
-        // Note: using connect['static'], as jshint complains about connect.static, because static is a reserved word
-        connect(connect['static'](path)).listen(port);
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    gruntConfig.copy = {
+        bundle: {
+            files: {
+                'output/bundle/': [
+                    'output/optimized/index.html',
+                    'output/optimized/lib/require.min.js',
+                    'output/optimized/js/requireConfig.js',
+                    'output/optimized/js/main.js'
+                ]
+            }
+        }
     };
-    grunt.registerTask('serve:src', 'HTTP serve src on port 8080', function () {
-        serve('src', 8080);
-    });
-    grunt.registerTask('serve:bundle', 'HTTP serve bundle on port 8081', function () {
-        serve('output/bundle', 8081);
-    });
-    grunt.registerTask('serve:test', 'HTTP serve src on port 8082', function () {
-        serve('src', 8082);
-    });
-    grunt.registerTask('wait', 'keep running until terminated', function () {
-        /*var done = */
-        this.async();
-    });
-    grunt.registerTask('test', 'junit:env serve:test qunit:serve');
+    grunt.registerTask('bundle', ['requirejs:bundle', 'copy:bundle']);
 
 
     // grunt
-    grunt.initConfig({
-        clean: cleanConfig,
-        lint: lintConfig,
-        jshint: jsHintOptions,
-        qunit: qunitConfig,
-        watch: watchConfig,
-        'qunit-cov': coverageConfig,
-        requirejs: requirejsConfig,
-        copy: copyConfig
-    });
+    grunt.initConfig(gruntConfig);
 };

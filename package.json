@@ -5,16 +5,18 @@
     "author": "Lars Thorup <lars@zealake.com>",
     "engine": "node 1.1.x",
     "devDependencies": {
-        "grunt": "0.3.x",
-        "phantomjs": "0.2.2",
-        "grunt-junit": "0.1.4",
-        "grunt-qunit-cov": ">=0.2.4",
-        "grunt-requirejs": "0.2.x",
-        "connect": "2.7.x",
-        "grunt-contrib-copy": "0.3.x",
-        "grunt-clean": "0.3.x"
+        "grunt": "0.4.0",
+        "grunt-contrib-clean": "~0.4.0",
+        "grunt-contrib-jshint": "~0.1.1",
+        "grunt-contrib-qunit": "~0.1.1",
+        "grunt-qunit-junit": "~0.1.0",
+        "grunt-contrib-watch": "~0.2.0",
+        "grunt-contrib-connect": "~0.1.2",
+        "grunt-contrib-requirejs": "~0.4.0",
+        "grunt-contrib-copy": "~0.4.0",
+        "grunt-qunit-cov": "~0.3.2"
     },
     "scripts": {
-        "test": "grunt --config Gruntfile.js ci"
+        "test": "grunt ci"
     }
 }
