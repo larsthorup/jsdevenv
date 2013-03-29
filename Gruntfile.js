@@ -73,7 +73,7 @@ module.exports = function (grunt) {
     gruntConfig.watch = {
         scripts: {
             files: ['src/**/*.*'],
-            tasks: ['lint qunit']
+            tasks: ['lint', 'qunit:src']
         }
     };
 
